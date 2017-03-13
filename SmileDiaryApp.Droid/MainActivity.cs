@@ -1,5 +1,6 @@
 ﻿using System;
-
+using Microsoft.Practices.Unity;
+using Prism.Unity;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
