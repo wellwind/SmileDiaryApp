@@ -4,6 +4,8 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Plugin.Media;
+using Prism.Services;
 
 namespace SmileDiaryApp.ViewModels
 {
@@ -16,8 +18,31 @@ namespace SmileDiaryApp.ViewModels
 			set { SetProperty(ref _title, value); }
 		}
 
-		public MainPageViewModel()
+		public DelegateCommand TakePictureCommand { get; private set; }
+
+		public MainPageViewModel(IPageDialogService dialogService)
 		{
+			TakePictureCommand = new DelegateCommand(async () =>
+			{
+				await CrossMedia.Current.Initialize();
+
+				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+				{
+					return;
+				}
+
+				var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+				{
+					Directory = "SmileDiary",
+					Name = "today.jpg",
+					DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front
+				});
+
+				if (file == null)
+					return;
+
+				return;
+			});
 
 		}
 
