@@ -3,5 +3,6 @@
 	<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 		<Label Text="{Binding Title}" />
 		<Button Text="Take Photo" Command="{Binding TakePictureCommand}" />
+		<Image Source="{Binding Photo}" />
 	</StackLayout>
 </ContentPage>

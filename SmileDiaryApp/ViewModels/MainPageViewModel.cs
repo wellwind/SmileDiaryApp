@@ -6,11 +6,25 @@ using System.Collections.Generic;
 using System.Linq;
 using Plugin.Media;
 using Prism.Services;
+using Xamarin.Forms;
 
 namespace SmileDiaryApp.ViewModels
 {
 	public class MainPageViewModel : BindableBase, INavigationAware
 	{
+		private ImageSource _ptoho;
+		public ImageSource Photo
+		{
+			get
+			{
+				return _ptoho;
+			}
+			set
+			{
+				SetProperty(ref _ptoho, value);
+			}
+		}
+
 		private string _title;
 		public string Title
 		{
@@ -42,6 +56,8 @@ namespace SmileDiaryApp.ViewModels
 
 				if (file == null)
 					return;
+
+				Photo = ImageSource.FromFile(file.Path);
 
 				return;
 			});
