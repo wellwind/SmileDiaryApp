@@ -48,5 +48,7 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>使用相機記錄你的微笑日記.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>需要存取相簿記錄你的微笑日記.</string>
 </dict>
 </plist>

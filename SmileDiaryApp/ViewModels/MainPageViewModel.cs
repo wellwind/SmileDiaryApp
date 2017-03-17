@@ -28,13 +28,15 @@ namespace SmileDiaryApp.ViewModels
 
 				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
 				{
+					await dialogService.DisplayAlertAsync("沒有可用相機", "您的手機沒有相機可以用！？天阿！快去買新的吧！！", "這就去買！");
 					return;
 				}
 
 				var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
 				{
+					SaveToAlbum = true,
 					Directory = "SmileDiary",
-					Name = "today.jpg",
+					Name = DateTime.Now.ToString("yyyyMMddHHmmss"),
 					DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front
 				});
 
