@@ -32,36 +32,62 @@ namespace SmileDiaryApp.ViewModels
 			set { SetProperty(ref _title, value); }
 		}
 
+		private IPageDialogService dialogService;
+
 		public DelegateCommand TakePictureCommand { get; private set; }
+		public DelegateCommand SelectFromAlbumCommand { get; private set; }
 
 		public MainPageViewModel(IPageDialogService dialogService)
 		{
-			TakePictureCommand = new DelegateCommand(async () =>
+			this.dialogService = dialogService;
+			TakePictureCommand = new DelegateCommand(takePictureCommand);
+			SelectFromAlbumCommand = new DelegateCommand(selectFromAlbumCommand);
+		}
+
+		private async void takePictureCommand()
+		{
+			await CrossMedia.Current.Initialize();
+
+			if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
 			{
-				await CrossMedia.Current.Initialize();
-
-				if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-				{
-					await dialogService.DisplayAlertAsync("沒有可用相機", "您的手機沒有相機可以用！？天阿！快去買新的吧！！", "這就去買！");
-					return;
-				}
-
-				var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-				{
-					SaveToAlbum = true,
-					Directory = "SmileDiary",
-					Name = DateTime.Now.ToString("yyyyMMddHHmmss"),
-					DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front
-				});
-
-				if (file == null)
-					return;
-
-				Photo = ImageSource.FromFile(file.Path);
-
+				await dialogService.DisplayAlertAsync("沒有可用相機", "您的手機沒有相機可以用！？天阿！快去買新的吧！！", "這就去買！");
 				return;
+			}
+
+			var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+			{
+				SaveToAlbum = true,
+				Directory = "SmileDiary",
+				Name = DateTime.Now.ToString("yyyyMMddHHmmss"),
+				DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front,
+				PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small
 			});
 
+			if (file == null)
+				return;
+
+			Photo = ImageSource.FromFile(file.Path);
+
+			return;
+		}
+
+		private async void selectFromAlbumCommand()
+		{
+			await CrossMedia.Current.Initialize();
+			if (!CrossMedia.Current.IsPickPhotoSupported)
+			{
+				await dialogService.DisplayAlertAsync("權限不足", "您沒有取用相簿的權限，沒辦法從相簿選擇照片喔", "好吧");
+				return;
+			}
+			var file = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions()
+			{
+				PhotoSize = Plugin.Media.Abstractions.PhotoSize.Small
+			});
+			if (file == null)
+				return;
+
+			Photo = ImageSource.FromFile(file.Path);
+			return;
 		}
 
 		public void OnNavigatedFrom(NavigationParameters parameters)

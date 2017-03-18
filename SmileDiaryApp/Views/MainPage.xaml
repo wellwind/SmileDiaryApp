@@ -3,6 +3,7 @@
 	<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
 		<Label Text="{Binding Title}" />
 		<Button Text="Take Photo" Command="{Binding TakePictureCommand}" />
+		<Button Text="Select from Album" Command="{Binding SelectFromAlbumCommand}" />
 		<Image Source="{Binding Photo}" />
 	</StackLayout>
 </ContentPage>
