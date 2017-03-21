@@ -16,7 +16,6 @@ namespace SmileDiaryApp
 
         protected override void RegisterTypes()
         {
-            Container.RegisterTypeForNavigation<MainPage>();
             Container.RegisterTypeForNavigation<MainTabbedPage>();
             Container.RegisterTypeForNavigation<TakePicturePage>();
             Container.RegisterTypeForNavigation<SmileListPage>();

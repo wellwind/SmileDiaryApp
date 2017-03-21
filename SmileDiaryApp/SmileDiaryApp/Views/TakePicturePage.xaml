@@ -5,10 +5,20 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SmileDiaryApp.Views.TakePicturePage"
              Title="取得微笑">
-    <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
-        <Label Text="{Binding Title}" />
-        <Button Text="Take Photo" Command="{Binding TakePictureCommand}" />
-        <Button Text="Select from Album" Command="{Binding SelectFromAlbumCommand}" />
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+
+    <StackLayout VerticalOptions="Start">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="拍張新照片" Command="{Binding TakePictureCommand}" />
+            <Button Grid.Column="1" Text="從相簿選擇" Command="{Binding SelectFromAlbumCommand}" />
+        </Grid>
+        <Button Text="就決定是你了!" Command="{Binding SelectFromAlbumCommand}" />
         <Image Source="{Binding Photo}" />
     </StackLayout>
 </ContentPage>
