@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace SmileDiaryApp.ViewModels
 {
-    public class MainPageViewModel : BindableBase, INavigationAware
+    public class TakePicturePageViewModel : BindableBase
     {
         private ImageSource _ptoho;
         public ImageSource Photo
@@ -37,7 +37,7 @@ namespace SmileDiaryApp.ViewModels
         public DelegateCommand TakePictureCommand { get; private set; }
         public DelegateCommand SelectFromAlbumCommand { get; private set; }
 
-        public MainPageViewModel(IPageDialogService dialogService)
+        public TakePicturePageViewModel(IPageDialogService dialogService)
         {
             this.dialogService = dialogService;
             TakePictureCommand = new DelegateCommand(takePictureCommand);

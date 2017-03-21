@@ -2,9 +2,9 @@
 
 namespace SmileDiaryApp.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class SmileScorePage : ContentPage
     {
-        public MainPage()
+        public SmileScorePage()
         {
             InitializeComponent();
         }

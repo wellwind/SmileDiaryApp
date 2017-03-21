@@ -11,12 +11,16 @@ namespace SmileDiaryApp
         {
             InitializeComponent();
 
-            NavigationService.NavigateAsync("MainPage?title=Hello%20from%20Xamarin.Forms");
+            NavigationService.NavigateAsync("MainTabbedPage");
         }
 
         protected override void RegisterTypes()
         {
             Container.RegisterTypeForNavigation<MainPage>();
+            Container.RegisterTypeForNavigation<MainTabbedPage>();
+            Container.RegisterTypeForNavigation<TakePicturePage>();
+            Container.RegisterTypeForNavigation<SmileListPage>();
+            Container.RegisterTypeForNavigation<SmileScorePage>();
         }
     }
 }
