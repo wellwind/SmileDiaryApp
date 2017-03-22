@@ -12,7 +12,59 @@ namespace SmileDiaryApp.ViewModels
 {
     public class TakePicturePageViewModel : BindableBase
     {
+        #region Binding Properties
+
+        #region 是否正在讀取中
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get
+            {
+                return _isLoading;
+            }
+            set
+            {
+                SetProperty(ref _isLoading, value);
+            }
+        }
+        #endregion
+
+        #region 是否已選取照片
+        private bool _hasGotPicture;
+
+        public bool HasGotPicture
+        {
+            get
+            {
+                return _hasGotPicture;
+            }
+            set
+            {
+                SetProperty(ref _hasGotPicture, value);
+            }
+        }
+        #endregion
+
+        #region 判斷後的情緒結果
+        private string _emotionResultText;
+
+        public string EmotionResultText
+        {
+            get
+            {
+                return _emotionResultText;
+            }
+            set
+            {
+                SetProperty(ref _emotionResultText, value);
+            }
+        }
+        #endregion
+
+        #region 選擇的圖片
         private ImageSource _ptoho;
+
         public ImageSource Photo
         {
             get
@@ -24,24 +76,28 @@ namespace SmileDiaryApp.ViewModels
                 SetProperty(ref _ptoho, value);
             }
         }
+        #endregion
 
-        private string _title;
-        public string Title
-        {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
-        }
+        #endregion
 
+        #region Services
         private IPageDialogService dialogService;
+        #endregion
 
+        #region Commands
         public DelegateCommand TakePictureCommand { get; private set; }
         public DelegateCommand SelectFromAlbumCommand { get; private set; }
+        public DelegateCommand UsePictureCommand { get; private set; }
+        #endregion
 
         public TakePicturePageViewModel(IPageDialogService dialogService)
         {
             this.dialogService = dialogService;
+            HasGotPicture = false;
+
             TakePictureCommand = new DelegateCommand(takePictureCommand);
             SelectFromAlbumCommand = new DelegateCommand(selectFromAlbumCommand);
+            UsePictureCommand = new DelegateCommand(usePictureCommand);
         }
 
         private async void takePictureCommand()
@@ -67,7 +123,7 @@ namespace SmileDiaryApp.ViewModels
                 return;
 
             Photo = ImageSource.FromFile(file.Path);
-
+            HasGotPicture = true;
             return;
         }
 
@@ -87,7 +143,13 @@ namespace SmileDiaryApp.ViewModels
                 return;
 
             Photo = ImageSource.FromFile(file.Path);
+            HasGotPicture = true;
             return;
+        }
+
+        private void usePictureCommand()
+        {
+
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
@@ -97,8 +159,7 @@ namespace SmileDiaryApp.ViewModels
 
         public void OnNavigatedTo(NavigationParameters parameters)
         {
-            if (parameters.ContainsKey("title"))
-                Title = (string)parameters["title"] + " and Prism";
+
         }
     }
 }
