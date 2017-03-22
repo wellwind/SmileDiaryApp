@@ -1,10 +1,13 @@
-﻿using Plugin.Media;
+﻿using Microsoft.ProjectOxford.Emotion;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Xamarin.Forms;
 
@@ -141,10 +144,18 @@ namespace SmileDiaryApp.ViewModels
             });
             if (file == null)
                 return;
-
             Photo = ImageSource.FromFile(file.Path);
             HasGotPicture = true;
             return;
+        }
+
+        private async void getEmotionResult(MediaFile file)
+        {
+            var emotionServiceClient = new EmotionServiceClient(Config.EmotionApiKey);
+            using (Stream stream = file.GetStream())
+            {
+                var emotionResult = await emotionServiceClient.RecognizeAsync(stream);
+            }
         }
 
         private void usePictureCommand()

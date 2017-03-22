@@ -35,7 +35,6 @@ namespace SmileDiaryApp.iOS
     {
         public void RegisterTypes(IUnityContainer container)
         {
-
         }
     }
 
