@@ -38,3 +38,6 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+
+# Config with secret key
+SmileDiaryApp/SmileDiaryApp/Config\.cs
