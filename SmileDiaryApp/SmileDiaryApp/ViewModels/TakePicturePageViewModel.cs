@@ -159,8 +159,19 @@ namespace SmileDiaryApp.ViewModels
                 IsLoading = true;
                 EmotionResultText = "分析中...";
                 var emotionResult = await emotionServiceClient.RecognizeAsync(stream);
-                EmotionResultText = String.Format("微笑指數：{0}%",
-                    (emotionResult[0].Scores.Happiness * 100).ToString("0.00"));
+                if (emotionResult.Length == 0)
+                {
+                    EmotionResultText = "找不到人臉可以分析，建議換張清晰點的照片唷";
+                }
+                else if (emotionResult.Length > 1)
+                {
+                    EmotionResultText = "太多張臉了，我分不出你是誰，換張獨照好嗎@@?";
+                }
+                else
+                {
+                    EmotionResultText = String.Format("微笑指數：{0}%",
+                        (emotionResult[0].Scores.Happiness * 100).ToString("0.00"));
+                }
                 IsLoading = false;
             }
         }
