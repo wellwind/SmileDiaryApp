@@ -33,6 +33,20 @@ namespace SmileDiaryApp.ViewModels
         }
         #endregion
 
+
+        #region 是否可以確認選擇照片
+        private bool _canConfirmPicture;
+        /// <summary>
+        /// 是否可以確認選擇照片
+        /// </summary>
+        public bool CanConfirmPicture
+        {
+            get { return this._canConfirmPicture; }
+            set { this.SetProperty(ref this._canConfirmPicture, value); }
+        }
+        #endregion
+
+
         #region 是否已選取照片
         private bool _hasGotPicture;
 
@@ -97,6 +111,7 @@ namespace SmileDiaryApp.ViewModels
         {
             this.dialogService = dialogService;
             HasGotPicture = false;
+            CanConfirmPicture = false;
 
             TakePictureCommand = new DelegateCommand(takePictureCommand);
             SelectFromAlbumCommand = new DelegateCommand(selectFromAlbumCommand);
@@ -157,6 +172,7 @@ namespace SmileDiaryApp.ViewModels
             using (Stream stream = file.GetStream())
             {
                 IsLoading = true;
+                CanConfirmPicture = false;
                 EmotionResultText = "分析中...";
                 var emotionResult = await emotionServiceClient.RecognizeAsync(stream);
                 if (emotionResult.Length == 0)
@@ -171,8 +187,10 @@ namespace SmileDiaryApp.ViewModels
                 {
                     EmotionResultText = String.Format("微笑指數：{0}%",
                         (emotionResult[0].Scores.Happiness * 100).ToString("0.00"));
+					CanConfirmPicture = true;
                 }
                 IsLoading = false;
+
             }
         }
 

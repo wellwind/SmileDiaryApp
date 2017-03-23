@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
@@ -17,7 +17,7 @@
             <Label HorizontalOptions="Center" IsVisible="{Binding HasGotPicture}" Text="{Binding EmotionResultText}" />
 
         </StackLayout>
-        <Grid AbsoluteLayout.LayoutBounds=".5,1,1,.1" AbsoluteLayout.LayoutFlags="All">
+        <Grid AbsoluteLayout.LayoutBounds=".5,1,1,.2" AbsoluteLayout.LayoutFlags="All">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
@@ -26,9 +26,9 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.ColumnSpan="2" Text="就決定是你了!" IsVisible="{Binding HasGotPicture}" Command="{Binding UsePictureCommand}" />
-            <Button Grid.Row="1" Grid.Column="0" Text="拍張新照片" Command="{Binding TakePictureCommand}" />
-            <Button Grid.Row="1" Grid.Column="1" Text="從相簿選擇" Command="{Binding SelectFromAlbumCommand}" />
+            <Button Grid.Row="0" Grid.ColumnSpan="2" BackgroundColor="Blue" TextColor="White" Text="就決定是你了!" IsVisible="{Binding CanConfirmPicture}" Command="{Binding UsePictureCommand}" />
+            <Button Grid.Row="1" Grid.Column="0" BackgroundColor="Aqua" TextColor="Black" Text="拍張新照片" Command="{Binding TakePictureCommand}" />
+            <Button Grid.Row="1" Grid.Column="1" BackgroundColor="Aqua" TextColor="Black" Text="從相簿選擇" Command="{Binding SelectFromAlbumCommand}" />
         </Grid>
     </AbsoluteLayout>
 </ContentPage>
