@@ -127,6 +127,7 @@ namespace SmileDiaryApp.ViewModels
 
             Photo = ImageSource.FromFile(file.Path);
             HasGotPicture = true;
+            getEmotionResult(file);
             return;
         }
 
@@ -146,6 +147,7 @@ namespace SmileDiaryApp.ViewModels
                 return;
             Photo = ImageSource.FromFile(file.Path);
             HasGotPicture = true;
+            getEmotionResult(file);
             return;
         }
 
@@ -154,7 +156,12 @@ namespace SmileDiaryApp.ViewModels
             var emotionServiceClient = new EmotionServiceClient(Config.EmotionApiKey);
             using (Stream stream = file.GetStream())
             {
+                IsLoading = true;
+                EmotionResultText = "分析中...";
                 var emotionResult = await emotionServiceClient.RecognizeAsync(stream);
+                EmotionResultText = String.Format("微笑指數：{0}%",
+                    (emotionResult[0].Scores.Happiness * 100).ToString("0.00"));
+                IsLoading = false;
             }
         }
 

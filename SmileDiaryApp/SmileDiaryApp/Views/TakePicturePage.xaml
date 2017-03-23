@@ -11,10 +11,10 @@
 
     <AbsoluteLayout>
         <StackLayout VerticalOptions="Start" AbsoluteLayout.LayoutBounds=".5,0,1,.7" AbsoluteLayout.LayoutFlags="All">
-            <Image Source="{Binding Photo}" />
+            <Image Source="{Binding Photo}" HorizontalOptions="Center" WidthRequest="250" />
             <ActivityIndicator IsRunning="{Binding IsLoading}" />
-            <Label IsVisible="{Binding HasGotPicture}" Text="{Binding EmotionResultText}" />
-            
+            <Label HorizontalOptions="Center" IsVisible="{Binding HasGotPicture}" Text="{Binding EmotionResultText}" />
+
         </StackLayout>
         <Grid AbsoluteLayout.LayoutBounds=".5,1,1,.1" AbsoluteLayout.LayoutFlags="All">
             <Grid.RowDefinitions>
