@@ -4,7 +4,10 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SmileDiaryApp.Views.SmileScorePage"
-             Icon="ChartIcon.png"
              Title="微笑曲線">
-  
+    <ContentPage.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" 
+                    Android="ChartIcon.png"
+                    iOS="chart-icon.png"/>
+    </ContentPage.Icon>
 </ContentPage>

@@ -4,8 +4,12 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="SmileDiaryApp.Views.TakePicturePage"
-             Icon="CameraIcon.png"
              Title="取得微笑">
+    <ContentPage.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource" 
+                    Android="CameraIcon.png"
+                    iOS="camera-icon.png"/>
+    </ContentPage.Icon>
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
     </ContentPage.Padding>
