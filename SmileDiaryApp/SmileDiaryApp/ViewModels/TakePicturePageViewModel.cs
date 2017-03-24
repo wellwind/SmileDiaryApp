@@ -15,6 +15,8 @@ namespace SmileDiaryApp.ViewModels
 {
     public class TakePicturePageViewModel : BindableBase
     {
+        private MediaFile _currentFile;
+
         #region Binding Properties
 
         #region 是否正在讀取中
@@ -45,7 +47,6 @@ namespace SmileDiaryApp.ViewModels
             set { this.SetProperty(ref this._canConfirmPicture, value); }
         }
         #endregion
-
 
         #region 是否已選取照片
         private bool _hasGotPicture;
@@ -79,7 +80,7 @@ namespace SmileDiaryApp.ViewModels
         }
         #endregion
 
-        #region 選擇的圖片
+        #region 選擇的圖片來源
         private ImageSource _ptoho;
 
         public ImageSource Photo
@@ -168,6 +169,8 @@ namespace SmileDiaryApp.ViewModels
 
         private async void getEmotionResult(MediaFile file)
         {
+            _currentFile = file;
+
             var emotionServiceClient = new EmotionServiceClient(Config.EmotionApiKey);
             using (Stream stream = file.GetStream())
             {
