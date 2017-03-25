@@ -16,6 +16,7 @@ namespace SmileDiaryApp.ViewModels
         private IEventAggregator eventAggregator;
 
         #region Properties
+
         #region 微笑清單
         private ObservableCollection<SmileRecordListItem> _smileRecords;
 
@@ -44,9 +45,8 @@ namespace SmileDiaryApp.ViewModels
                 if(value != null)
                 {
                     goDetailPage();
+                    SelectedRecord = null;
                 }
-
-                value = null;
             }
         }
         #endregion

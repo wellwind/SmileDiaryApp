@@ -12,7 +12,6 @@ namespace SmileDiaryApp.ViewModels
     {
         SmileRecordListItem _item;
 
-
         #region Photo
         private ImageSource _photo;
         /// <summary>
@@ -24,7 +23,6 @@ namespace SmileDiaryApp.ViewModels
             set { this.SetProperty(ref this._photo, value); }
         }
         #endregion
-
 
         #region Score
         private string _score;
@@ -38,23 +36,34 @@ namespace SmileDiaryApp.ViewModels
         }
         #endregion
 
-
+        #region Title
+        private string _title;
+        /// <summary>
+        /// PropertyDescription
+        /// </summary>
+        public string Title
+        {
+            get { return this._title; }
+            set { this.SetProperty(ref this._title, value); }
+        }
+        #endregion
 
         public SmileListItemPageViewModel()
         {
 
         }
+        public void OnNavigatedFrom(NavigationParameters parameters)
+        {
+            
+        }
 
         public void OnNavigatedTo(NavigationParameters parameters)
         {
-            this._item = parameters["record"] as SmileRecordListItem;
+            _item = parameters["record"] as SmileRecordListItem;
             Photo = _item.ImageSource;
             Score = _item.Score;
+            Title = String.Format("{0} 微笑指數", _item.Date);
         }
 
-        public void OnNavigatedFrom(NavigationParameters parameters)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

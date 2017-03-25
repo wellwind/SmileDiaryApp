@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="SmileDiaryApp.Views.SmileListItemPage">
-    <StackLayout>
-        <Label Text="結果"/>
-        <Image Grid.Row="0" Source="{Binding Photo}" WidthRequest="300" HorizontalOptions="Center" Aspect="AspectFit" />
-        <Label Text="{Binding Score}" />
-    </StackLayout>
+             x:Class="SmileDiaryApp.Views.SmileListItemPage"
+             Title="{Binding Title}">
+    <AbsoluteLayout>
+        <Grid AbsoluteLayout.LayoutBounds=".5,.1,1,.8" AbsoluteLayout.LayoutFlags="All">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <Image Grid.Row="0" Source="{Binding Photo}" WidthRequest="300" HorizontalOptions="Center" Aspect="AspectFit" />
+            <Label Grid.Row="1" HorizontalOptions="Center" Text="{Binding Score}" />
+        </Grid>
+    </AbsoluteLayout>
 </ContentPage>

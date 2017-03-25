@@ -8,7 +8,7 @@
              Title="微笑紀錄">
     <StackLayout>
         <ListView ItemsSource="{Binding SmileRecords}" 
-              SelectedItem="{Binding SelectedRecord}">
+              SelectedItem="{Binding SelectedRecord, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
