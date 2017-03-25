@@ -20,6 +20,7 @@ namespace SmileDiaryApp
             Container.RegisterTypeForNavigation<TakePicturePage>();
             Container.RegisterTypeForNavigation<SmileListPage>();
             Container.RegisterTypeForNavigation<SmileScorePage>();
+            Container.RegisterTypeForNavigation<SmileListViewPage>();
         }
     }
 }

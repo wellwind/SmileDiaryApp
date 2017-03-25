@@ -2,9 +2,11 @@
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
+using SmileDiaryApp.Events;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,6 +19,7 @@ namespace SmileDiaryApp.ViewModels
     {
         private MediaFile _currentFile;
         private double _score;
+        private IEventAggregator eventAggregator;
 
         #region Binding Properties
 
@@ -113,6 +116,7 @@ namespace SmileDiaryApp.ViewModels
         #region Services
         private IPageDialogService dialogService;
         private IFileService fileService;
+        private INavigationService navigationService;
         #endregion
 
         #region Commands
@@ -121,10 +125,16 @@ namespace SmileDiaryApp.ViewModels
         public DelegateCommand UsePictureCommand { get; private set; }
         #endregion
 
-        public TakePicturePageViewModel(IPageDialogService dialogService, IFileService fileService)
+        public TakePicturePageViewModel(
+            INavigationService navigationService,
+            IPageDialogService dialogService, 
+            IEventAggregator eventAggregator, 
+            IFileService fileService)
         {
+            this.navigationService = navigationService;
             this.dialogService = dialogService;
             this.fileService = fileService;
+            this.eventAggregator = eventAggregator;
 
             HasGotPicture = false;
             CanConfirmPicture = false;
@@ -232,6 +242,8 @@ namespace SmileDiaryApp.ViewModels
         {
             var dataService = new DataService(fileService);
             dataService.SavePhotoData(_currentFile, _score);
+            this.eventAggregator.GetEvent<PhotoChangesEvent>().Publish();
+            this.navigationService.NavigateAsync(@"MainTabbedPage\SmileListPage");
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)

@@ -42,23 +42,31 @@ namespace SmileDiaryApp
             return record != null;
         }
 
+        public string GetPhotoPath(string dateWithoutSlash)
+        {
+            var filename = String.Format("smile-diary-image-{0}.jpg", dateWithoutSlash);
+            return fileService.GetSavedFilePath(filename);
+        }
+
         public void SavePhotoData(MediaFile currentFile, double score)
         {
             var data = LoadPhotoData().ToList();
             var date = DateTime.Now.ToString("yyyy/MM/dd");
+            var filename = String.Format("smile-diary-image-{0}.jpg",
+                DateTime.Now.ToString("yyyyMMdd"));
+
+            fileService.CopyFile(currentFile.Path, filename);
             var record = data.FirstOrDefault(rec => rec.Date.Equals(date));
             if (record != null)
             {
-                record.Path = currentFile.Path;
-                record.score = score;
+                record.Score = score;
             }
             else
             {
                 data.Add(new SmileRecord()
                 {
-                    Path = currentFile.AlbumPath,
                     Date = date,
-                    score = score
+                    Score = score
                 });
             }
             this.fileService.SaveText(dbPath, JsonHelper.serialize(data));

@@ -12,18 +12,30 @@ namespace SmileDiaryApp.iOS
 {
     public class FileService : IFileService
     {
+        public string GetSavedFilePath(string filename)
+        {
+            var documentPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            var filePath = Path.Combine(documentPath, filename);
+            return filePath;
+        }
+
         public void SaveText(string filename, string text)
         {
-            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            var filePath = Path.Combine(documentsPath, filename);
+            var filePath = GetSavedFilePath(filename);
             File.WriteAllText(filePath, text);
         }
 
         public string LoadText(string filename)
         {
-            var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            var filePath = Path.Combine(documentsPath, filename);
+            var filePath = GetSavedFilePath(filename);
             return File.ReadAllText(filePath);
         }
+
+        public void CopyFile(string from, string to)
+        {
+            var filePath = GetSavedFilePath(to);
+            File.Copy(from, filePath, true);
+        }
+
     }
 }
