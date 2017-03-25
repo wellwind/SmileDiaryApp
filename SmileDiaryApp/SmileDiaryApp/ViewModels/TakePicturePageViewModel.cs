@@ -20,6 +20,18 @@ namespace SmileDiaryApp.ViewModels
 
         #region Binding Properties
 
+        #region 是否可以拍照或選照片
+        private bool _canDoTakePicture;
+        /// <summary>
+        /// 是否可以拍照或選照片
+        /// </summary>
+        public bool CanDoTakePicture
+        {
+            get { return this._canDoTakePicture; }
+            set { this.SetProperty(ref this._canDoTakePicture, value); }
+        }
+        #endregion
+
         #region 是否正在讀取中
         private bool _isLoading;
 
@@ -116,6 +128,7 @@ namespace SmileDiaryApp.ViewModels
 
             HasGotPicture = false;
             CanConfirmPicture = false;
+            CanDoTakePicture = true;
 
             TakePictureCommand = new DelegateCommand(takePictureCommand);
             SelectFromAlbumCommand = new DelegateCommand(selectFromAlbumCommand);
@@ -179,6 +192,7 @@ namespace SmileDiaryApp.ViewModels
             {
                 _score = 0;
                 IsLoading = true;
+                CanDoTakePicture = false;
                 CanConfirmPicture = false;
                 EmotionResultText = "分析中...";
                 try
@@ -191,7 +205,7 @@ namespace SmileDiaryApp.ViewModels
                 }
                 
                 IsLoading = false;
-
+                CanDoTakePicture = true;
             }
         }
 
