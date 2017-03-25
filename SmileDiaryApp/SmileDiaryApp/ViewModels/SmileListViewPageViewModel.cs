@@ -28,12 +28,35 @@ namespace SmileDiaryApp.ViewModels
             set { SetProperty(ref _smileRecords, value); }
         }
         #endregion
+
+        #region SelectedRecord
+        private SmileRecordListItem _selectedRecord;
+        /// <summary>
+        /// 選擇的紀錄
+        /// </summary>
+        public SmileRecordListItem SelectedRecord
+        {
+            get { return this._selectedRecord; }
+            set
+            {
+                this.SetProperty(ref this._selectedRecord, value);
+
+                if(value != null)
+                {
+                    goDetailPage();
+                }
+
+                value = null;
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Services
         private IFileService fileService;
         private INavigationService navigationService;
- 
+
         #endregion
 
         public SmileListViewPageViewModel(INavigationService navigationService, IEventAggregator eventAggregator, IFileService fileService)
@@ -42,12 +65,20 @@ namespace SmileDiaryApp.ViewModels
             this.fileService = fileService;
             this.eventAggregator = eventAggregator;
 
-            reloadList();
-
             eventAggregator.GetEvent<PhotoChangesEvent>().Subscribe(() =>
             {
                 reloadList();
             });
+
+            reloadList();
+
+        }
+
+        private async void goDetailPage()
+        {
+            NavigationParameters param = new NavigationParameters();
+            param.Add("record", SelectedRecord);
+            await navigationService.NavigateAsync("SmileListItemPage", param);
         }
 
         private void reloadList()
@@ -56,7 +87,7 @@ namespace SmileDiaryApp.ViewModels
             SmileRecords = new ObservableCollection<SmileRecordListItem>();
             foreach (var record in dataService.LoadPhotoData().OrderByDescending(rec => rec.Date))
             {
-                 SmileRecords.Add(new SmileRecordListItem()
+                SmileRecords.Add(new SmileRecordListItem()
                 {
                     Date = record.Date,
                     ImageSource = dataService.GetPhotoPath(record.Date.Replace("/", "")),

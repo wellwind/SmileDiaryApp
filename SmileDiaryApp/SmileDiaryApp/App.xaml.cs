@@ -21,6 +21,7 @@ namespace SmileDiaryApp
             Container.RegisterTypeForNavigation<SmileListPage>();
             Container.RegisterTypeForNavigation<SmileScorePage>();
             Container.RegisterTypeForNavigation<SmileListViewPage>();
+            Container.RegisterTypeForNavigation<SmileListItemPage>();
         }
     }
 }
