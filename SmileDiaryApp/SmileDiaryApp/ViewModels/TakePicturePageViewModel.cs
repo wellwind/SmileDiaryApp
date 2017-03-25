@@ -16,6 +16,7 @@ namespace SmileDiaryApp.ViewModels
     public class TakePicturePageViewModel : BindableBase
     {
         private MediaFile _currentFile;
+        private double _score;
 
         #region Binding Properties
 
@@ -34,7 +35,6 @@ namespace SmileDiaryApp.ViewModels
             }
         }
         #endregion
-
 
         #region 是否可以確認選擇照片
         private bool _canConfirmPicture;
@@ -100,6 +100,7 @@ namespace SmileDiaryApp.ViewModels
 
         #region Services
         private IPageDialogService dialogService;
+        private IFileService fileService;
         #endregion
 
         #region Commands
@@ -108,9 +109,11 @@ namespace SmileDiaryApp.ViewModels
         public DelegateCommand UsePictureCommand { get; private set; }
         #endregion
 
-        public TakePicturePageViewModel(IPageDialogService dialogService)
+        public TakePicturePageViewModel(IPageDialogService dialogService, IFileService fileService)
         {
             this.dialogService = dialogService;
+            this.fileService = fileService;
+
             HasGotPicture = false;
             CanConfirmPicture = false;
 
@@ -174,6 +177,7 @@ namespace SmileDiaryApp.ViewModels
             var emotionServiceClient = new EmotionServiceClient(Config.EmotionApiKey);
             using (Stream stream = file.GetStream())
             {
+                _score = 0;
                 IsLoading = true;
                 CanConfirmPicture = false;
                 EmotionResultText = "分析中...";
@@ -204,15 +208,16 @@ namespace SmileDiaryApp.ViewModels
             }
             else
             {
-                EmotionResultText = String.Format("微笑指數：{0}%",
-                    (emotionResult[0].Scores.Happiness * 100).ToString("0.00"));
+                _score = emotionResult[0].Scores.Happiness * 100;
+                EmotionResultText = String.Format("微笑指數：{0}%", _score.ToString("0.00"));
                 CanConfirmPicture = true;
             }
         }
 
         private void usePictureCommand()
         {
-
+            var dataService = new DataService(fileService);
+            dataService.SavePhotoData(_currentFile, _score);
         }
 
         public void OnNavigatedFrom(NavigationParameters parameters)
