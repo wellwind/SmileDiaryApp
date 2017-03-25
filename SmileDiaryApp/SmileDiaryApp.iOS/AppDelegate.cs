@@ -25,6 +25,7 @@ namespace SmileDiaryApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            new Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
