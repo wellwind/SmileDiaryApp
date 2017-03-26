@@ -23,7 +23,7 @@
         <chart:SfChart Grid.Column="0" Grid.Row="0"
                        HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <chart:SfChart.Title>
-                <chart:ChartTitle Text="最近30日微笑曲線" TextAlignment="Center" TextColor="Black"/>
+                <chart:ChartTitle Text="最近30次微笑曲線" TextAlignment="Center" TextColor="Black"/>
             </chart:SfChart.Title>
 
             <chart:SfChart.PrimaryAxis>
