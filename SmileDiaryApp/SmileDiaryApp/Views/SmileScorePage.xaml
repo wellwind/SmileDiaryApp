@@ -11,16 +11,33 @@
                     Android="ChartIcon.png"
                     iOS="chart-icon.png"/>
     </ContentPage.Icon>
-    <chart:SfChart>
-        <chart:SfChart.PrimaryAxis>
-            <chart:CategoryAxis>
-                <chart:CategoryAxis></chart:CategoryAxis>
-            </chart:CategoryAxis>
-        </chart:SfChart.PrimaryAxis>
-        <chart:SfChart.SecondaryAxis>
-            <chart:NumericalAxis>
-                <chart:NumericalAxis></chart:NumericalAxis>
-            </chart:NumericalAxis>
-        </chart:SfChart.SecondaryAxis>
-    </chart:SfChart>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <chart:SfChart Grid.Column="0" Grid.Row="0"
+                       HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <chart:SfChart.PrimaryAxis>
+                <chart:CategoryAxis>
+                    <chart:CategoryAxis></chart:CategoryAxis>
+                </chart:CategoryAxis>
+            </chart:SfChart.PrimaryAxis>
+            <chart:SfChart.SecondaryAxis>
+                <chart:NumericalAxis>
+                    <chart:NumericalAxis></chart:NumericalAxis>
+                </chart:NumericalAxis>
+            </chart:SfChart.SecondaryAxis>
+        </chart:SfChart>
+        <StackLayout Grid.Column="0" Grid.Row="1">
+            <Label Text="取得成就"></Label>
+            <ListView>
+                
+            </ListView>
+        </StackLayout>
+    </Grid>
 </ContentPage>
