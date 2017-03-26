@@ -65,13 +65,10 @@ namespace SmileDiaryApp.ViewModels
             this.fileService = fileService;
             this.eventAggregator = eventAggregator;
 
-            eventAggregator.GetEvent<PhotoChangesEvent>().Subscribe(() =>
+            eventAggregator.GetEvent<PhotoChangesEvent>().Subscribe((data) =>
             {
-                reloadList();
+                reloadList(data);
             });
-
-            reloadList();
-
         }
 
         private async void goDetailPage()
@@ -81,11 +78,11 @@ namespace SmileDiaryApp.ViewModels
             await navigationService.NavigateAsync("SmileListItemPage", param);
         }
 
-        private void reloadList()
+        private void reloadList(IEnumerable<SmileRecord> data)
         {
             var dataService = new DataService(fileService);
             SmileRecords = new ObservableCollection<SmileRecordListItem>();
-            foreach (var record in dataService.LoadPhotoData().OrderByDescending(rec => rec.Date))
+            foreach (var record in data.OrderByDescending(rec => rec.Date))
             {
                 SmileRecords.Add(new SmileRecordListItem()
                 {

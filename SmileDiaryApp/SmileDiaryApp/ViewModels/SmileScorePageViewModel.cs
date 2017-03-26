@@ -32,22 +32,24 @@ namespace SmileDiaryApp.ViewModels
         {
             this.fileService = fileService;
             this.eventAggregator = eventAggregator;
-
-            readDataSource();
+            
+            this.eventAggregator.GetEvent<PhotoChangesEvent>().Subscribe(data =>
+            {
+                readDataSource(data);
+            });
         }
 
-        private void readDataSource()
+        private void readDataSource(IEnumerable<SmileRecord> records)
         {
-            _dataSource = new ObservableCollection<ChartDataPoint>();
+            DataSource = new ObservableCollection<ChartDataPoint>();
             var dataService = new DataService(fileService);
-            var last30DaysData = dataService
-                .LoadPhotoData()
+            var last30DaysData = records
                 .OrderByDescending(r => r.Date)
                 .Take(30)
                 .OrderBy(r => r.Date);
             foreach (var data in last30DaysData)
             {
-                _dataSource.Add(new ChartDataPoint(
+                DataSource.Add(new ChartDataPoint(
                     data.Date, 
                     Convert.ToDouble(data.Score.ToString("0.00"))));
             }

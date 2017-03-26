@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SmileDiaryApp.Events
 {
-    public class PhotoChangesEvent : PubSubEvent
+    public class PhotoChangesEvent : PubSubEvent<List<SmileRecord>>
     {
     }
 }

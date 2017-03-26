@@ -242,7 +242,7 @@ namespace SmileDiaryApp.ViewModels
         {
             var dataService = new DataService(fileService);
             dataService.SavePhotoData(_currentFile, _score);
-            this.eventAggregator.GetEvent<PhotoChangesEvent>().Publish();
+            this.eventAggregator.GetEvent<PhotoChangesEvent>().Publish(dataService.LoadPhotoData().ToList());
             this.navigationService.NavigateAsync(@"MainTabbedPage\SmileListPage");
         }
 
