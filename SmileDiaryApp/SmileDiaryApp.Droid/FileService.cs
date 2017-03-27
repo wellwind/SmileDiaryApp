@@ -39,5 +39,10 @@ namespace SmileDiaryApp.Droid
             var filePath = GetSavedFilePath(to);
             System.IO.File.Copy(from, filePath, true);
         }
+
+        public bool FileExist(string filename)
+        {
+            return System.IO.File.Exists(GetSavedFilePath(filename));
+        }
     }
 }

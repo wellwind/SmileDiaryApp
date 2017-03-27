@@ -13,5 +13,6 @@ namespace SmileDiaryApp
         void SaveText(string filename, string text);
         string LoadText(string filename);
         void CopyFile(string from, string to);
+        bool FileExist(string filename);
     }
 }

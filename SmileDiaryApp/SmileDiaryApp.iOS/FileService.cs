@@ -37,5 +37,10 @@ namespace SmileDiaryApp.iOS
             File.Copy(from, filePath, true);
         }
 
+        public bool FileExist(string filename)
+        {
+            var filePath = GetSavedFilePath(filename);
+            return File.Exists(filePath);
+        }
     }
 }
