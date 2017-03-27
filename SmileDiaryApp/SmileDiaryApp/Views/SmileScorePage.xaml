@@ -38,7 +38,7 @@
             </chart:SfChart.SecondaryAxis>
 
             <chart:SfChart.Series>
-                <chart:SplineSeries ItemsSource="{Binding DataSource}"/>
+                <chart:LineSeries ItemsSource="{Binding DataSource}"/>
             </chart:SfChart.Series>
         </chart:SfChart>
         <StackLayout Grid.Column="0" Grid.Row="1">
