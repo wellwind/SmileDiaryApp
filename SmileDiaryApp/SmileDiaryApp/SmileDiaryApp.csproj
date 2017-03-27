@@ -35,9 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BadgeData.cs" />
+    <Compile Include="BadgeService.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="DataService.cs" />
     <Compile Include="Events\PhotoChangesEvent.cs" />
+    <Compile Include="BadgeCheckers\IBageChecker.cs" />
     <Compile Include="IFileService.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

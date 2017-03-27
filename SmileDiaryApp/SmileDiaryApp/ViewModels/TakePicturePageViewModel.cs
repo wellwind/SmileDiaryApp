@@ -241,7 +241,10 @@ namespace SmileDiaryApp.ViewModels
         private void usePictureCommand()
         {
             var dataService = new DataService(fileService);
+            var badgeService = new BadgeService(fileService);
+
             dataService.SavePhotoData(_currentFile, _score);
+            badgeService.AddRecord(_score);
             this.eventAggregator.GetEvent<PhotoChangesEvent>().Publish(dataService.LoadPhotoData().ToList());
             this.navigationService.NavigateAsync(@"MainTabbedPage\SmileListPage");
         }
