@@ -14,6 +14,7 @@ namespace SmileDiaryApp
         private BadgeData badgeData;
 
         private IEnumerable<IBadgeChecker> badgeCheckers;
+        private IEnumerable<IBadgeChecker> continuousChecker;
 
         public BadgeService(IFileService fileService)
         {
@@ -30,9 +31,12 @@ namespace SmileDiaryApp
 
         private void initBadgeCheckers()
         {
-            badgeCheckers = new List<IBadgeChecker>()
+            continuousChecker = new List<IBadgeChecker>()
             {
-                new ContinuousDaysChecker()
+                new Smile100DaysChecker(),
+                new Smile90DaysChecker(),
+                new Smile80DaysChecker(),
+                new SmileLessThen50DaysChecker()
             };
         }
 
@@ -43,16 +47,23 @@ namespace SmileDiaryApp
                 badgeData.LastRecordDate = DateTime.Now.ToString("yyyy/MM/dd");
             }
 
-            foreach(var checker in badgeCheckers)
+            // 檢查是否有連續紀錄
+            (new ContinuousDaysChecker()).Check(score, badgeData);
+
+            // 有連續, 才繼續檢查
+            if (badgeData.RecordDays > 1)
             {
-                checker.Check(score, badgeData);
+                foreach (var checker in continuousChecker)
+                {
+                    checker.Check(score, badgeData);
+                }
             }
-           
+
             badgeData.LastRecordDate = DateTime.Now.ToString("yyyy/MM/dd");
             saveRecord();
         }
 
-       
+
 
         private void saveRecord()
         {

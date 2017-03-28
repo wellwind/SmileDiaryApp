@@ -36,6 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BadgeCheckers\ContinuousDaysChecker.cs" />
+    <Compile Include="BadgeCheckers\Smile80DaysChecker.cs" />
+    <Compile Include="BadgeCheckers\SmileLessThen50DaysChecker.cs" />
+    <Compile Include="BadgeCheckers\Smile90DaysChecker.cs" />
+    <Compile Include="BadgeCheckers\Smile100DaysChecker.cs" />
     <Compile Include="BadgeData.cs" />
     <Compile Include="BadgeService.cs" />
     <Compile Include="Config.cs" />
