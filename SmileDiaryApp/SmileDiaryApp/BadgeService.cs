@@ -19,6 +19,7 @@ namespace SmileDiaryApp
         public BadgeService(IFileService fileService)
         {
             this.fileService = fileService;
+            initBadgeCheckers();
 
             if (!fileService.FileExist(dbPath))
             {
