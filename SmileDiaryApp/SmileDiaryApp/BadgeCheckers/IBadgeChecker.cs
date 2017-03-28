@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SmileDiaryApp.BadgeCheckers
 {
-    public interface IBageChecker
+    public interface IBadgeChecker
     {
-        bool Check(IEnumerable<SmileRecord> smileRecord, BadgeData badgeData);
+        void Check(double score, BadgeData badgeData);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmileDiaryApp.BadgeCheckers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace SmileDiaryApp
         private string dbPath = "smile-diary-badges.db.txt";
         private IFileService fileService;
         private BadgeData badgeData;
+
+        private IEnumerable<IBadgeChecker> badgeCheckers;
 
         public BadgeService(IFileService fileService)
         {
@@ -25,14 +28,31 @@ namespace SmileDiaryApp
             badgeData = JsonHelper.Deserialize<BadgeData>(fileService.LoadText(dbPath));
         }
 
-        public void AddRecord(double record)
+        private void initBadgeCheckers()
         {
+            badgeCheckers = new List<IBadgeChecker>()
+            {
+                new ContinuousDaysChecker()
+            };
+        }
+
+        public void AddRecord(double score)
+        {
+            if (String.IsNullOrEmpty(badgeData.LastRecordDate))
+            {
+                badgeData.LastRecordDate = DateTime.Now.ToString("yyyy/MM/dd");
+            }
+
+            foreach(var checker in badgeCheckers)
+            {
+                checker.Check(score, badgeData);
+            }
+           
             badgeData.LastRecordDate = DateTime.Now.ToString("yyyy/MM/dd");
-
-            // TODO: 檢查是否取得成就, 以及成就進度紀錄
-
             saveRecord();
         }
+
+       
 
         private void saveRecord()
         {
