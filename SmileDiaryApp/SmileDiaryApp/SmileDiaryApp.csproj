@@ -49,6 +49,7 @@
     <Compile Include="IFileService.cs" />
     <Compile Include="JsonHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmileBadge.cs" />
     <Compile Include="SmileRecord.cs" />
     <Compile Include="SmileRecordListItem.cs" />
     <Compile Include="ViewModels\MainTabbedPageViewModel.cs" />

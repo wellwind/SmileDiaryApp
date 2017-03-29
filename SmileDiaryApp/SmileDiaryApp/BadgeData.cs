@@ -93,11 +93,11 @@ namespace SmileDiaryApp
         /// <summary>
         /// 三天微笑指數低於50%
         /// </summary>
-        public bool Badge201_3DaysLessThan50 { get; set; }
+        public bool Badge801_3DaysLessThan50 { get; set; }
 
         /// <summary>
         /// 十天微笑指數低於50%
         /// </summary>
-        public bool Badge202_10DaysLessThan50 { get; set; }
+        public bool Badge802_10DaysLessThan50 { get; set; }
     }
 }

@@ -16,6 +16,8 @@ namespace SmileDiaryApp
         private IEnumerable<IBadgeChecker> badgeCheckers;
         private IEnumerable<IBadgeChecker> continuousChecker;
 
+        public BadgeData BadgeData => badgeData;
+
         public BadgeService(IFileService fileService)
         {
             this.fileService = fileService;
