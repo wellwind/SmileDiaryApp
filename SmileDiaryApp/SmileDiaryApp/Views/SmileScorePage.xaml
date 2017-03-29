@@ -42,9 +42,22 @@
             </chart:SfChart.Series>
         </chart:SfChart>
         <StackLayout Grid.Column="0" Grid.Row="1">
-            <Label Text="取得成就"></Label>
-            <ListView>
-                
+            <Label Text="取得成就" BackgroundColor="Aqua"></Label>
+            <ListView ItemsSource="{Binding SmileBadges}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Text="{Binding State}" VerticalOptions="Center"/>
+                                <Label Grid.Column="1" Grid.Row="0" Text="{Binding Name}" VerticalOptions="Center"/>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
     </Grid>
