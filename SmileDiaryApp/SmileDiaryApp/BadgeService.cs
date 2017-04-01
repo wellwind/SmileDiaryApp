@@ -41,6 +41,11 @@ namespace SmileDiaryApp
                 new Smile80DaysChecker(),
                 new SmileLessThen50DaysChecker()
             };
+
+            badgeCheckers = new List<IBadgeChecker>()
+            {
+                new Badge001_FirstRecordChecker()
+            };
         }
 
         public void AddRecord(double score)
@@ -54,9 +59,14 @@ namespace SmileDiaryApp
             (new ContinuousDaysChecker()).Check(score, badgeData);
 
             // 有連續, 才繼續檢查
-            if (badgeData.RecordDays > 1)
+            if (badgeData.RecordDays >= 1)
             {
                 foreach (var checker in continuousChecker)
+                {
+                    checker.Check(score, badgeData);
+                }
+
+                foreach (var checker in badgeCheckers)
                 {
                     checker.Check(score, badgeData);
                 }
