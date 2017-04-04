@@ -46,7 +46,10 @@ namespace SmileDiaryApp
             {
                 new Badge001_FirstRecordChecker(),
                 new Badge002_3DaysRecordChecker(),
-                new Badge003_10DaysRecordChecker()
+                new Badge003_10DaysRecordChecker(),
+                new Badge004_30DaysRecordChecker(),
+                new Badge005_100DaysRecordChecker(),
+                new Badge006_300DaysRecordChecker()
             };
         }
 
