@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="BadgeCheckers\Badge001_FirstRecordChecker.cs" />
     <Compile Include="BadgeCheckers\Badge002_3DaysRecordChecker.cs" />
+    <Compile Include="BadgeCheckers\Badge003_10DaysRecordChecker.cs" />
     <Compile Include="BadgeCheckers\ContinuousDaysChecker.cs" />
     <Compile Include="BadgeCheckers\Smile80DaysChecker.cs" />
     <Compile Include="BadgeCheckers\SmileLessThen50DaysChecker.cs" />

@@ -44,7 +44,9 @@ namespace SmileDiaryApp
 
             badgeCheckers = new List<IBadgeChecker>()
             {
-                new Badge001_FirstRecordChecker()
+                new Badge001_FirstRecordChecker(),
+                new Badge002_3DaysRecordChecker(),
+                new Badge003_10DaysRecordChecker()
             };
         }
 
