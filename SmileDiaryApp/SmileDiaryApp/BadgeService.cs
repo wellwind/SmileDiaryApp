@@ -51,7 +51,8 @@ namespace SmileDiaryApp
                 new Badge005_100DaysRecordChecker(),
                 new Badge006_300DaysRecordChecker(),
                 new Badge101_3Days80Checker(),
-                new Badge102_3Days90Checker()
+                new Badge102_3Days90Checker(),
+                new Badge103_3Days100Checker()
             };
         }
 
