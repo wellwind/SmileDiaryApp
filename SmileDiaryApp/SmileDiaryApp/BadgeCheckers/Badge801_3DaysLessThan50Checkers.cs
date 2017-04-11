@@ -12,7 +12,7 @@ namespace SmileDiaryApp.BadgeCheckers
         {
             if (!badgeData.Badge801_3DaysLessThan50)
             {
-                if (badgeData.SmileLessThen50Days >= 3)
+                if (badgeData.SmileLessThen50Days >= 10)
                 {
                     badgeData.Badge801_3DaysLessThan50 = true;
                 }
