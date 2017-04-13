@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace SmileDiaryApp.BadgeCheckers
 {
-    public class Badge801_3DaysLessThan50Checkers : IBadgeChecker
+    class Badge802_10DaysLessThan50Checker : IBadgeChecker
     {
         public void Check(double score, BadgeData badgeData)
         {
-            if (!badgeData.Badge801_3DaysLessThan50)
+            if (!badgeData.Badge802_10DaysLessThan50)
             {
-                if (badgeData.SmileLessThen50Days >= 3)
+                if (badgeData.SmileLessThen50Days >= 10)
                 {
-                    badgeData.Badge801_3DaysLessThan50 = true;
+                    badgeData.Badge802_10DaysLessThan50 = true;
                 }
             }
         }

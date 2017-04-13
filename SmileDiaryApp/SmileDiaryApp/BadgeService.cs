@@ -55,7 +55,8 @@ namespace SmileDiaryApp
                 new Badge103_3Days100Checker(),
                 new Badge104_10Days100Checker(),
                 new Badge105_30Days100Checker(),
-                new Badge801_3DaysLessThan50Checkers()
+                new Badge801_3DaysLessThan50Checkers(),
+                new Badge802_10DaysLessThan50Checker()
             };
         }
 
@@ -86,8 +87,6 @@ namespace SmileDiaryApp
             badgeData.LastRecordDate = DateTime.Now.ToString("yyyy/MM/dd");
             saveRecord();
         }
-
-
 
         private void saveRecord()
         {

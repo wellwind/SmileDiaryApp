@@ -47,6 +47,7 @@
     <Compile Include="BadgeCheckers\Badge104_10Days100Checker.cs" />
     <Compile Include="BadgeCheckers\Badge105_30Days100Checker.cs" />
     <Compile Include="BadgeCheckers\Badge801_3DaysLessThan50Checkers.cs" />
+    <Compile Include="BadgeCheckers\Badge802_10DaysLessThan50Checker.cs" />
     <Compile Include="BadgeCheckers\ContinuousDaysChecker.cs" />
     <Compile Include="BadgeCheckers\Smile80DaysChecker.cs" />
     <Compile Include="BadgeCheckers\SmileLessThen50DaysChecker.cs" />
